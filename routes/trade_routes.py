@@ -4,8 +4,7 @@ from config.database import conn
 from models.trade_models import Trade,TradeDetails
 from schemas.trade_schema import trades_serializer,trade_serializer
 from datetime import datetime
-from bson import BSON
-import json
+
 
 
 
