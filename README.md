@@ -8,9 +8,9 @@ This project provides an API for retrieving and searching trades. The API is bui
 
 1. Clone the project repository from Github:
 
-    ```python
+```python
     git clone https://github.com/username/repo_name.git
-    ```
+```
 
 
 2. Install the required Python packages using pip:
@@ -22,7 +22,7 @@ pip install -r requirements.txt
 3. Start the API server:
 
 ```python
-uvicorn main:app --reload`
+uvicorn main:app --reload
 ```
 
 
