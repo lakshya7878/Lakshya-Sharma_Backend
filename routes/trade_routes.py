@@ -60,16 +60,15 @@ def parse_json(data):
 
 @client.post("/addtrade")
 async def Add_Trade(item : Trade):
-    # if(conn.info.Trades.find({"trade_id" : item["trade_id"]}).count()>0):
-        # return {"Trade ID already exists"}
+    print(conn.info.Trades.find({"trade_id" : item.trade_id}))
+    if(conn.info.Trades.find({"trade_id" : item.trade_id})):
+        return {"Trade ID already exists"}
+        
     ret = {}
     for name,value in item :
         if(name!="trade_details") :
             ret[name] = value
         else :
             ret[name] = convertTradedetails(value)
-    print(ret)
-    print(type(ret))
     conn.info.Trades.insert_one(ret)
-    return {}
-    # return ret
+    return {"Successfuly Inserted Data"}
