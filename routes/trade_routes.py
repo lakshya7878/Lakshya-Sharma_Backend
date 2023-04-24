@@ -2,11 +2,11 @@ from fastapi import APIRouter
 from typing import Optional
 from config.database import conn
 from models.trade_models import Trade,TradeDetails
-from schemas.trade_schema import trades_serializer,trade_serializer
+from schemas.trade_schema import trades_serializer,trade_serializer,convertTradedetails
 from datetime import datetime
-
-
-
+import json
+import bson;
+from bson import json_util
 
 client = APIRouter()
 
@@ -32,7 +32,7 @@ async def List_Trades(search : Optional[str] = None,assetClass : Optional[str] =
             if(item["trade_details"]["price"]<minPrice):
                 continue
         if(tradeType!=None) :
-            if(item["buySellIndicator"]!=tradeType):
+            if(item["trade_details"]["buySellIndicator"]!=tradeType):
                 continue
         if(start!=None) :
             if(start<item["trade_date_time"]) :
@@ -54,11 +54,22 @@ async def Trade_By_Id(trade_id : str) :
             return [item]
     return [{"Trade Id Not-Found"}]
 
+def parse_json(data):
+    return json.loads(json_util.dumps(data))
+
 
 @client.post("/addtrade")
 async def Add_Trade(item : Trade):
     # if(conn.info.Trades.find({"trade_id" : item["trade_id"]}).count()>0):
         # return {"Trade ID already exists"}
-    jss = json.dumps(item.__dict__,default=str)
-    conn.info.Trades.insert_one(dict(jss))
-    return item
+    ret = {}
+    for name,value in item :
+        if(name!="trade_details") :
+            ret[name] = value
+        else :
+            ret[name] = convertTradedetails(value)
+    print(ret)
+    print(type(ret))
+    conn.info.Trades.insert_one(ret)
+    return {}
+    # return ret

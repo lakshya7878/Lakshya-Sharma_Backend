@@ -19,8 +19,8 @@ class Trade(BaseModel):
     instrument_id: str = Field(alias="instrumentId", description="The ISIN/ID of the instrument traded. E.g. TSLA, AAPL, AMZN...etc")
 
     instrument_name: str = Field(alias="instrumentName", description="The name of the instrument traded.")
-
     trade_date_time: dt.datetime = Field(alias="tradeDateTime", description="The date-time the Trade was executed")
+
 
     trade_details: TradeDetails = Field(alias="tradeDetails", description="The details of the trade, i.e. price, quantity")
 

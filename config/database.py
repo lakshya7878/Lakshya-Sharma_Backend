@@ -3,7 +3,8 @@ from pymongo.server_api import ServerApi
 import os
 username = os.environ.get('user')
 password = os.environ.get('pass')
-uri = f'mongodb+srv://{username}:{password}@cluster0.ftb81fm.mongodb.net/info?retryWrites=true&w=majorityf'
+# &w=majorityf
+uri = 'mongodb+srv://sharmalakshya341:sharmalakshya@cluster0.ftb81fm.mongodb.net/info?retryWrites=true'
 
 
 conn = MongoClient(uri)
