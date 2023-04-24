@@ -18,7 +18,6 @@ async def List_Trades(search : Optional[str] = None,assetClass : Optional[str] =
     if(not anyquery) :
         return items
     for item in items: 
-        print(item)
         if(search!=None) :
             if(search not in item["trader"] and search not in item["counterparty"] and search not in item["instrument_id"] and search not in item["instrument_name"]) :
                 continue
@@ -60,10 +59,9 @@ def parse_json(data):
 
 @client.post("/addtrade")
 async def Add_Trade(item : Trade):
-    print(conn.info.Trades.find({"trade_id" : item.trade_id}))
-    if(conn.info.Trades.find({"trade_id" : item.trade_id})):
+    if(conn.info.Trades.count_documents({"trade_id" : item.trade_id}, limit = 1)!=0):
         return {"Trade ID already exists"}
-        
+
     ret = {}
     for name,value in item :
         if(name!="trade_details") :
@@ -71,4 +69,28 @@ async def Add_Trade(item : Trade):
         else :
             ret[name] = convertTradedetails(value)
     conn.info.Trades.insert_one(ret)
-    return {"Successfuly Inserted Data"}
+    return ["Successfuly Inserted" ,trades_serializer(conn.info.Trades.find({"trade_id" : item.trade_id}))]
+
+
+@client.put("/update/{trade_id}")
+async def Update_Trade(trade_id : str ,asset_class: Optional[str] =None,trader: Optional[str] = None ) :
+    if(conn.info.Trades.find({"trade_id" : trade_id})):
+        filter = { 'trade_id': trade_id }
+        if(asset_class!=None):
+            newvalues = { "$set": { 'asset_class': asset_class } }
+            conn.info.Trades.update_one(filter, newvalues)
+        if(trader!=None) :
+            newvalues = { "$set": { 'trader': trader } }
+            conn.info.Trades.update_one(filter, newvalues)
+        return ["Successfuly Updated" ,trades_serializer(conn.info.Trades.find(filter))]
+
+    else :
+        return {"No such ID exists"}
+        
+@client.delete("/delete/{trade_id}")
+async def Delete_Trade(trade_id : str) :
+    if(conn.info.Trades.find({"trade_id" : trade_id})):
+        conn.info.Trades.delete_one({"trade_id" : trade_id})
+        return {"Deleted Successfully"}
+    else :
+        return {"No such trade exists"}
