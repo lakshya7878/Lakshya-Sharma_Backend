@@ -9,7 +9,7 @@ This project provides an API for retrieving and searching trades. The API is bui
 1. Clone the project repository from Github:
 
 ```python
-    git clone https://github.com/username/repo_name.git
+git clone https://github.com/username/repo_name.git
 ```
 
 
