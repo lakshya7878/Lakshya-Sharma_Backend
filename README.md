@@ -9,7 +9,7 @@ This project provides an API for retrieving and searching trades. The API is bui
 1. Clone the project repository from Github:
 
 ```python
-git clone https://github.com/username/repo_name.git
+git clone git@github.com:lakshya7878/Lakshya-Sharma_Backend.git
 ```
 
 
@@ -41,7 +41,9 @@ GET /trades?page=1&size=50
 
 ### List trades
 
-`GET /trades`
+```python
+GET /trades
+```
 
 Returns a list of all trades.
 
