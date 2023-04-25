@@ -56,8 +56,13 @@ async def Trade_By_Id(trade_id : str) :
             return [item]
     return [{"Trade Id Not-Found"}]
 
-def parse_json(data):
-    return json.loads(json_util.dumps(data))
+
+
+
+@client.get("/sortby/price")
+async def Sort_Trades_By_Price() :
+    items = trades_serializer(conn.info.Trades.find().sort("trade_details.price")) 
+    return items
 
 
 @client.post("/addtrade")
