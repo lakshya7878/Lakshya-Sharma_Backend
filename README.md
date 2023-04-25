@@ -47,19 +47,25 @@ Returns a list of all trades.
 
 ### Single trade
 
-`GET /trades/{id}`
+```python
+GET /trades/{id}
+```
 
 Returns a single trade by ID.
 
 ### Searching trades
 
-`GET /trades?search={query}`
+```python
+GET /trades?search={query}
+```
 
 Returns a list of trades that match the search query. The search query can be any text that exists in the fields listed in the overview above.
 
 ### Advanced filtering
 
-`GET /trades?assetClass={asset_class}&end={end}&maxPrice={max_price}&minPrice={min_price}&start={start}&tradeType={trade_type}`
+```python
+GET /trades?assetClass={asset_class}&end={end}&maxPrice={max_price}&minPrice={min_price}&start={start}&tradeType={trade_type}
+```
 
 Returns a list of trades that match the specified filters. The filters are optional, and can be combined to narrow down the search results.
 
@@ -74,3 +80,7 @@ Contributions to this project are welcome. Please create a pull request with you
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more information.
+
+
+
+
