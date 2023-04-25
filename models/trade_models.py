@@ -3,6 +3,8 @@ import datetime as dt
 from typing import Optional
 from pydantic import BaseModel, Field
 
+
+
 class TradeDetails(BaseModel):
     buySellIndicator: str = Field(description="A value of BUY for buys, SELL for sells.")
 
@@ -27,3 +29,4 @@ class Trade(BaseModel):
     trade_id: str = Field(alias="tradeId", default=None, description="The unique ID of the trade")
 
     trader: str = Field(description="The name of the Trader")
+
