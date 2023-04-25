@@ -33,8 +33,11 @@ The Trade API provides the following endpoints:
 
 ### Pagination 
 
-
 Implemented pagination of list of data while displaying Trades.
+
+```python
+GET /trades?page=1&size=50
+```
 
 ### List trades
 
