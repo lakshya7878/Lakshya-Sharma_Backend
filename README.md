@@ -39,6 +39,13 @@ Implemented pagination of list of data while displaying Trades.
 GET /trades?page=1&size=50
 ```
 
+### Sorting
+
+Implemented sorting of list of data by price
+```python
+GET /sortby/price
+```
+
 ### List trades
 
 ```python
