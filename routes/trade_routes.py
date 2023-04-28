@@ -44,7 +44,7 @@ async def List_Trades(search : Optional[str] = None,assetClass : Optional[str] =
                 continue
         quer.append(item)  
     if(len(quer)==0):
-        quer = {"No such trades found" }
+        quer.append({"Error" : "No such item found"})
     return paginate(quer)
 
 
